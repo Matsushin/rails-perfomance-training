@@ -13,7 +13,7 @@ h2.page__title タスク一覧
           tr
             td.text-right= task.id
             td= task.title
-            td= task.body&.truncate(20)
+            td= task.body&.truncate(30)
             td= task.category.name
   - else
     .alert.alert-warning
