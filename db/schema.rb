@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_21_045510) do
+ActiveRecord::Schema.define(version: 2020_09_21_055416) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "task_assignees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["task_id", "user_id"], name: "index_task_assignees_on_task_id_and_user_id", unique: true
+    t.index ["task_id"], name: "index_task_assignees_on_task_id"
+    t.index ["user_id"], name: "index_task_assignees_on_user_id"
   end
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -28,5 +38,13 @@ ActiveRecord::Schema.define(version: 2020_09_21_045510) do
     t.index ["category_id"], name: "index_tasks_on_category_id"
   end
 
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "task_assignees", "tasks"
+  add_foreign_key "task_assignees", "users"
   add_foreign_key "tasks", "categories"
 end

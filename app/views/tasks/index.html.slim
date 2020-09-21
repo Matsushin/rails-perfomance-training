@@ -8,6 +8,7 @@ h2.page__title タスク一覧
           th.table-active.text-center= Task.human_attribute_name(:title)
           th.table-active.text-center= Task.human_attribute_name(:body)
           th.table-active.text-center= Task.human_attribute_name(:category)
+          th.table-active.text-center
       tbody
         - @tasks.each do |task|
           tr
@@ -15,6 +16,8 @@ h2.page__title タスク一覧
             td= task.title
             td= task.body&.truncate(30)
             td= task.category.name
+            td= task.task_assignees.pluck(:user_id).map{ |user_id| @user_names[user_id] }.join(',')
+    = paginate @tasks
   - else
     .alert.alert-warning
       | まだタスクは登録されていません
