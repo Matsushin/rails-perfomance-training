@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    attributes:
+      task:
+        id: ID
+        title: タイトル
+        body: 内容
+        category: カテゴリ
+        status: ステータス
