@@ -18,29 +18,43 @@ end
 
 unless Task.exists?
   category_ids = Category.all.pluck(:id)
-  # タスク作成
-  tasks = 10000.times.map do |index|
-    {
-      title: "タスクタイトル#{index + 1}",
-      body: "タスク内容",
-      category_id: category_ids.sample
-    }
+  p 'Start import tasks'
+  # タスク50万件作成
+  10.times do |index_1|
+    tasks = 50_000.times.map do |index_2|
+      index = index_1 * 50_000 + index_2 + 1
+      {
+          title: "タスクタイトル#{index}",
+          body: "タスク内容",
+          status: Task.statuses.values.sample,
+          category_id: category_ids.sample
+      }
+    end
+    Task.import! tasks
+    p "Imported #{(index_1 + 1) * 50_000}/1000000 records"
   end
-  Task.import! tasks
 
+  p 'End import tasks'
 end
 
 unless TaskAssignee.exists?
-  # タスク割り当て作成
+  # タスク割り当て50万件作成
   user_ids = User.all.pluck(:id)
-  task_assignees = Task.all.map do |task|
-    user_ids.sample(rand(1..3)).map do |user_id|
-      {
-          task_id: task.id,
-          user_id: user_id
-      }
-    end
-  end.flatten
-  p task_assignees
-  TaskAssignee.import! task_assignees
+  p 'Start import task_assignees'
+  index = 0
+  task_count = Task.count
+  Task.find_in_batches do |tasks|
+    index += 1
+    task_assignees = tasks.map do |task|
+      user_ids.sample(rand(1..3)).map do |user_id|
+        {
+            task_id: task.id,
+            user_id: user_id
+        }
+      end
+    end.flatten
+    TaskAssignee.import! task_assignees
+    p "Imported #{index * 1000}/#{task_count} records"
+  end
+  p 'End import task_assignees'
 end

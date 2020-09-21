@@ -8,7 +8,7 @@ h2.page__title タスク一覧
           th.table-active.text-center= Task.human_attribute_name(:title)
           th.table-active.text-center= Task.human_attribute_name(:body)
           th.table-active.text-center= Task.human_attribute_name(:category)
-          th.table-active.text-center
+          th.table-active.text-center 担当者
       tbody
         - @tasks.each do |task|
           tr
