@@ -20,9 +20,11 @@ unless Task.exists?
   category_ids = Category.all.pluck(:id)
   p 'Start import tasks'
   # タスク50万件作成
-  10.times do |index_1|
-    tasks = 50_000.times.map do |index_2|
-      index = index_1 * 50_000 + index_2 + 1
+  first_loop_count = 10
+  second_loop_count = 50_000
+  first_loop_count.times do |index_1|
+    tasks = second_loop_count.times.map do |index_2|
+      index = index_1 * second_loop_count + index_2 + 1
       {
           title: "タスクタイトル#{index}",
           body: "タスク内容",
@@ -31,7 +33,7 @@ unless Task.exists?
       }
     end
     Task.import! tasks
-    p "Imported #{(index_1 + 1) * 50_000}/1000000 records"
+    p "Imported #{(index_1 + 1) * second_loop_count}/#{first_loop_count * second_loop_count} records"
   end
 
   p 'End import tasks'
