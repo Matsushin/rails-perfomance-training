@@ -32,7 +32,7 @@ http://localhost:3000/
 
 ## 課題
 ### 課題1
-- Bulletで抽出されたN+1を解消しよう
+- Bulletでアラート表示されたN+1を解消しよう
   - [N+1またはBulletとは?](https://morizyun.github.io/ruby/library-bullet.html)
   - ホームにアクセスすると以下の画像が表示されるので、表示された文言に従ってN+1を解消してください
     -  `categories` テーブルへの `SELECT`文の実行がひとつのTask毎に発生してしまっている
@@ -42,11 +42,16 @@ http://localhost:3000/
 
 ### 課題2
 - 担当者名の表示で発生するN+1を解消しよう
-  - ホームにアクセスすると `users` テーブルへの`SELECT`文の実行がひとつのTask毎に発生してしまっている
-- ヒント： ユーザ名はハッシュ等の型で全ユーザ分まとめて先に持たせておいて利用する
-- [回答のPR](https://github.com/Matsushin/rails-perfomance-training/pull/3)
+  - ホームにアクセスするとBulletのアラート表示はされないが `users` テーブルへの`SELECT`文の実行がひとつのTask毎に発生してしまっている
+- ヒント： `includes` メソッドの引数にはTaskモデルのアソシエーションの指定ができる
+- [回答のPR](https://github.com/Matsushin/rails-perfomance-training/pull/5)
 
 ### 課題3
+- `includes` を使わずカテゴリのN+1を解消しよう
+  - 課題1での `includes` を用いた方法とは別の方法で解消してください。
+- ヒント： カテゴリ名はキーがカテゴリID、値がカテゴリ名のハッシュとして全カテゴリ分まとめて先に持たせておいてビュー側で利用する
+- [回答のPR](https://github.com/Matsushin/rails-perfomance-training/pull/6)
+### 課題4
 - テーブルにインデックスを貼ってSQLの速度を改善しよう
   - `Task.waiting_count_group_by_category` メソッドを実行すると1秒以上かかるので1秒以内となるように
     - PCの性能次第でかかる時間は変わります
