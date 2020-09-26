@@ -51,6 +51,7 @@ http://localhost:3000/
   - 課題1での `includes` を用いた方法とは別の方法で解消してください。
 - ヒント： カテゴリ名はキーがカテゴリID、値がカテゴリ名のハッシュとして全カテゴリ分まとめて先に持たせておいてビュー側で利用する
 - [回答のPR](https://github.com/Matsushin/rails-perfomance-training/pull/6)
+
 ### 課題4
 - テーブルにインデックスを貼ってSQLの速度を改善しよう
   - `Task.waiting_count_group_by_category` メソッドを実行すると1秒以上かかるので1秒以内となるように
