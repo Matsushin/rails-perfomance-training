@@ -15,7 +15,7 @@ h2.page__title タスク一覧
             td.text-right= task.id
             td= task.title
             td= task.body&.truncate(30)
-            td= task.category.name
+            td= @category_names[task.category_id]
             td= task.users.pluck(:name).join(',')
     = paginate @tasks
   - else
