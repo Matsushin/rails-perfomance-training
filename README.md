@@ -37,6 +37,7 @@ http://localhost:3000/
   - ホームにアクセスすると以下の画像が表示されるので、表示された文言に従ってN+1を解消してください
     -  `categories` テーブルへの `SELECT`文の実行がひとつのTask毎に発生してしまっている
 <img width="463" alt="localhost_3000_の内容_と_RailsPefromanceTraining" src="https://user-images.githubusercontent.com/592230/94328866-0e47a900-fff1-11ea-9511-fde53b18a4bd.png">
+
 - ヒント： `ActiveRecord` の `includes` メソッドを利用する
 - [回答のPR](Bulletで抽出されたN+1を解消しよう)
 
@@ -50,7 +51,7 @@ http://localhost:3000/
 - テーブルにインデックスを貼ってSQLの速度を改善しよう
   - `Task.waiting_count_group_by_category` メソッドを実行すると1秒以上かかるので1秒以内となるように
     - PCの性能次第でかかる時間は変わります
-- ヒント1： SQLの `explain` を利用して実行計画を確認しながら試そう
+- ヒント： SQLの `explain` を利用して実行計画を確認しながらインデックスの効果を試そう
   - [explainとは？](https://style.potepan.com/articles/18910.html)
 
 #### 改善前
