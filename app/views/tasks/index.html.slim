@@ -16,7 +16,7 @@ h2.page__title タスク一覧
             td= task.title
             td= task.body&.truncate(30)
             td= task.category.name
-            td= task.users.pluck(:name).join(',')
+            td= task.task_assignees.pluck(:user_id).map{ |user_id| @user_names[user_id] }.join(',')
     = paginate @tasks
   - else
     .alert.alert-warning
