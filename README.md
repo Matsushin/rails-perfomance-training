@@ -1,24 +1,19 @@
-# README
+### アプリ初期設定
+- 大量に初期データを投入するため完了するまで約20分ほどかかります
+```
+$ make init
+```
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 起動・停止
+### 起動コマンド
+```
+$ make up
+```
 
-Things you may want to cover:
+### 停止コマンド
+```
+$ make down
+```
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 確認
+http://localhost:3000/
